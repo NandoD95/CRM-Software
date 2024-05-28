@@ -8,7 +8,16 @@ class Patient:
         self.id = id 
     
     def __repr__(self): 
-        return f'<Patient name = {self.name}>' 
+        return f'<Patient name = {self.name}>'  
+    
+    @property 
+    def name(self) 
+        return self._name 
+    
+    @name.setter 
+        def name(self, new_name):
+            if isinstance(new_name, str) and 0 < len(new_name) <= 20:
+            self._name = new_name
 
 # Create a patient table if it doesnt  exist  
     @classmethod 
@@ -82,7 +91,16 @@ class Patient:
             SELECT * FROM patients 
             WHERE name = ? 
         """ 
-        rows = CURSOR.execute(sql, (name,)).fetchone()
+        rows = CURSOR.execute(sql, (name,)).fetchone() 
+
+#Update a patient 
+    def update(self): 
+        sql = """ 
+        UPDATE patients 
+        SET name = ?, gender = ?, ssn = ?, age = ?, address = ? 
+    """ 
+    CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address)) 
+    CONN.commit()
 
 
 

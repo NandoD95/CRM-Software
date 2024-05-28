@@ -3,7 +3,7 @@ from Patient import patient
 class Doctor:
     all = []
 
-    def __init__(self, name, specialty, patient_id):
+    def __init__(self, name, patient_id):
         self.name = name
         self.specialty = specialty
         self.patient_id = patient_id
