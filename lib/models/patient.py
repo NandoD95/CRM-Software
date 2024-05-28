@@ -1,6 +1,6 @@
 from models.__init__ import CURSOR,CONN 
 
-class Patient
+class Patient:
     all = {} 
 
     def __init__(self,name,id) 
@@ -39,13 +39,13 @@ class Patient
             INSERT INTO patients (name,gender,ssn,age,address)
             VALUES (?, ?, ?, ?, ?)
         """ 
-        CURSOR.execute(sql,(self.name, self.gender, self.ssn, self.age self.address)) 
+        CURSOR.execute(sql,(self.name, self.gender, self.ssn, self.age, self.address)) 
         CONN.commit() 
         self.id = CURSOR.lastrowid
        
 # Create new patients into the database 
     @classmethod
-    def create(cls,name,gender,ssn,age,adress) 
+    def create(cls,name,gender,ssn,age,adress): 
         new_patient = cls(name=name, gender=gender, ssn=ssn, age=age, address=address) 
         new_patient.save() 
         return new_patient  
@@ -68,7 +68,7 @@ class Patient
 
 # Finds a patient in the database 
     @classmethod 
-    def find_by_id(cls,id) 
+    def find_by_id(cls,id): 
         sql = """ 
             SELECT * FROM patients 
             WHERE id = ? 
@@ -77,7 +77,7 @@ class Patient
 
 # Finds patients by their name 
     @classmethod 
-    def find_by_name(cls,name) 
+    def find_by_name(cls,name): 
         sql = """ 
             SELECT * FROM patients 
             WHERE name = ? 
