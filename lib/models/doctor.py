@@ -63,4 +63,33 @@ class Doctor:
     def create_doctor(cls, name, specialization, patient_id):
         new_doctor = cls(name=name, specialization=specialization, patient_id=patient_id)
         new_doctor.save()
-        return new_doctor
+        return new_doctor 
+
+#get all doctors from db 
+    @classmethod 
+    def get_all_doctors(cls): 
+        sql = """ 
+            SELECT * FROM doctors 
+        """ 
+        rows = CURSOR.execute(sql).fetchall()
+
+
+
+# find doctor by name in db 
+    @classmethod 
+    def find_by_name(cls, name): 
+        sql = """ 
+            SELECT * FROM doctors 
+            WHERE name = ? 
+        """ 
+        row = CURSOR.execute(sql, (name,)).fetchone() 
+
+#find doctor by id in db 
+    @classmethod 
+    def find_by_id(cls, id): 
+        sql = """ 
+            SELECT * FROM doctors 
+            WHERE id = ? 
+        """ 
+        row = CURSOR.execute(sql, (id,)).fetchone() 
+
