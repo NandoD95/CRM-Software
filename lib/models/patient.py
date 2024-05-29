@@ -3,7 +3,7 @@ from models.__init__ import CURSOR,CONN
 class Patient:
     all = {} 
 
-    def __init__(self,name,id): 
+    def __init__(self,name,id=None): 
         self.name = name 
         self.id = id 
     
