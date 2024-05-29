@@ -97,8 +97,6 @@ class Doctor:
         """ 
         rows = CURSOR.execute(sql).fetchall()
 
-
-
 # find doctor by name in db 
     @classmethod 
     def find_by_name(cls, name): 
