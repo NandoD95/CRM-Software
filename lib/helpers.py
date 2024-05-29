@@ -40,7 +40,8 @@ def create_patient():
 
 def update_patient(): 
     patient_id = input("Enter patient ID: ")
-    if patient: = Patient.find_by_id(patient_id) 
+    patient = Patient.find_by_id(patient_id) 
+    if patient:
         try: 
             name = input("Enter new patient name: ") 
             patient.name = name  
@@ -62,7 +63,8 @@ def update_patient():
 
 def delete_patient(): 
     patient_id = input("Enter patient ID: ") 
-    if patient: = Patient.find_by_id(patient_id) 
+    patient = Patient.find_by_id(patient_id)
+    if patient:
         patient.delete() 
         print(f'Patient with ID {patient_id} deleted') 
     else: 
@@ -96,7 +98,8 @@ def create_doctor():
 
 def update_doctor(): 
     doctor_id = input("Enter doctor ID: ") 
-    if doctor: = Doctor.find_by_id(doctor_id) 
+    doctor = Doctor.find_by_id(doctor_id) 
+    if doctor:
         try: 
             name = input("Enter new doctor name: ") 
             doctor.name = name 
@@ -109,12 +112,13 @@ def update_doctor():
             print(f'Success {doctor}') 
         except Exception as exc: 
             print(f'Error updating doctor:', exc)  
-            else: 
+        else: 
                 print(f'Doctor with ID {doctor_id} not found') 
 
 def delete_doctor(): 
     doctor_id = input("Enter doctor ID: ") 
-    if doctor = Doctor.find_by_id(doctor_id) 
+    doctor = Doctor.find_by_id(doctor_id) 
+    if doctor:
         doctor.delete() 
         print(f'Doctor with ID {doctor_id} deleted')  
     else: 
@@ -122,7 +126,8 @@ def delete_doctor():
 
 def list_patient_doctors(): 
     id_ = input("Enter patient ID: ") 
-    if patient = Patient.find_by_id(id_) 
+    patient = Patient.find_by_id(id_) 
+    if patient:
         try:
             for doctor in patient.doctors():
                 print(doctor)
