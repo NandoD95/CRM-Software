@@ -1,15 +1,16 @@
 from models.patient import Patient
+from models.__init__ import CURSOR, CONN
 
 class Doctor:
     all = {} 
-    specialization = ['Cardiologist', 'Neurologist', 'Pediatrician', 'Dermatologist', 'Radiologist']
+    specializations = ['Cardiologist', 'Neurologist', 'Pediatrician', 'Dermatologist', 'Radiologist']
 
-    def __init__(self, name, speciality, patient_id, id=None):
+    def __init__(self, name, specialization, patient_id, id=None):
         self.name = name 
-        self.speciality = speciality
+        self.specialization = specialization
         self.patient_id = patient_id
         self.id = id
-        Doctor.all.append(self)
+        # Doctor.all.append(self)
 
     def __repr__(self): 
         return f'<Doctor name = {self.name}>' 
@@ -26,22 +27,22 @@ class Doctor:
             raise TypeError("Patient ID must be an integer") 
     
     @property 
-    def speciality(self): 
-        return self._speciality 
+    def specialization(self): 
+        return self._specialization 
     
-    @speciality.setter 
-    def speciality(self, new_speciality): 
-        if new_speciality in Doctor.specialization: 
-            self._speciality = new_speciality
+    @specialization.setter 
+    def specialization(self, new_specialization): 
+        if new_specialization in Doctor.specializations: 
+            self._specialization = new_specialization
 
 # Create a table for doctor
     @classmethod
     def create_table(cls):
         sql = """ 
-            CREATE TABLE IF NOT EXISTS patients ( 
+            CREATE TABLE IF NOT EXISTS doctors ( 
             id INTEGER PRIMARY KEY, 
-            name TEXT 
-            specialization TEXT 
+            name TEXT, 
+            specialization TEXT, 
             patient_id INTEGER 
         )
         """ 
@@ -49,15 +50,14 @@ class Doctor:
         CONN.commit()
 
 # save db to table
-    @classmethod
-    def save(self): 
-        sql = """ 
-            INSERT INTO patients (name, specialization, patient_id)
-            VALUES (?, ?, ?)
-        """ 
-        CURSOR.execute(sql,(self.name, self.specialization, self.patient_id)) 
-        CONN.commit() 
-        self.id = CURSOR.lastrowid
+    # def save(self): 
+    #     sql = """ 
+    #         INSERT INTO patients (name, specialization, patient_id)
+    #         VALUES (?, ?, ?)
+    #     """ 
+    #     CURSOR.execute(sql,(self.name, self.specialization, self.patient_id)) 
+    #     CONN.commit() 
+    #     self.id = CURSOR.lastrowid
 
 # save a doctor to db
     def save_doctor(self):
@@ -73,7 +73,7 @@ class Doctor:
     @classmethod
     def create_doctor(cls, name, specialization, patient_id):
         new_doctor = cls(name=name, specialization=specialization, patient_id=patient_id)
-        new_doctor.save()
+        new_doctor.save_doctor()
         return new_doctor  
 
     @classmethod 
@@ -117,3 +117,9 @@ class Doctor:
         row = CURSOR.execute(sql, (id,)).fetchone() 
         return cls.instance_from_db(row) if row else None 
 
+# delete table from db
+    @classmethod 
+    def drop_table(cls): 
+        sql = "DROP TABLE IF EXISTS doctors" 
+        CURSOR.execute(sql) 
+        CONN.commit() 

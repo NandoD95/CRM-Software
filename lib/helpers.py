@@ -12,6 +12,7 @@ def exit_program():
 
 def list_patients(): 
     patients = Patient.get_all() 
+    print (patients)
     for patient in patients: 
         print(patient) 
 
