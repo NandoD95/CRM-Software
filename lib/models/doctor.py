@@ -1,10 +1,12 @@
 from Patient import patient
 
 class Doctor:
-    all = []
+    all = {} 
+    specialization = ['Cardiologist', 'Neurologist', 'Pediatrician', 'Dermatologist', 'Radiologist']
 
-    def __init__(self, name, patient_id, id=none):
-        self.name = name
+    def __init__(self, name, speciality, patient_id, id=none):
+        self.name = name 
+        self.speciality = speciality
         self.patient_id = patient_id
         self.id = id
         Doctor.all.append(self)
@@ -21,7 +23,16 @@ class Doctor:
         if isinstance(patient_id, int):
             self._patient_id = patient_id
             else:
-                raise TypeError("Patient ID must be an integer")
+                raise TypeError("Patient ID must be an integer") 
+    
+    @property 
+    def speciality(self): 
+        return self._speciality 
+    
+    @speciality.setter 
+    def speciality(self, new_speciality): 
+        if new_speciality in Doctor.specialization: 
+            self._speciality = new_speciality
 
 # Create a table for doctor
     @classmethod
@@ -63,7 +74,20 @@ class Doctor:
     def create_doctor(cls, name, specialization, patient_id):
         new_doctor = cls(name=name, specialization=specialization, patient_id=patient_id)
         new_doctor.save()
-        return new_doctor 
+        return new_doctor  
+
+    @classmethod 
+    def instance_from_db(cls,row) 
+        doctor = cls.all.get(row[0]) 
+        if doctor: 
+            doctor.name = row[1] 
+            doctor.specialization = row[2] 
+            doctor.patient_id = row[3] 
+        else: 
+            doctor = cls(name=row[1], specialization=row[2], patient_id=row[3]) 
+            doctor.id = row[0] 
+            cls.all[doctor.id] = doctor 
+        return doctor
 
 #get all doctors from db 
     @classmethod 
@@ -83,6 +107,7 @@ class Doctor:
             WHERE name = ? 
         """ 
         row = CURSOR.execute(sql, (name,)).fetchone() 
+        return cls.instance_from_db(row) if row else None 
 
 #find doctor by id in db 
     @classmethod 
@@ -92,4 +117,5 @@ class Doctor:
             WHERE id = ? 
         """ 
         row = CURSOR.execute(sql, (id,)).fetchone() 
+        return cls.instance_from_db(row) if row else None 
 
