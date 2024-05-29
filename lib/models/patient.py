@@ -67,7 +67,23 @@ class Patient:
         """ 
         CURSOR.execute(sql, (self.id,)) 
         CONN.commit() 
-        self.id = none 
+        self.id = none  
+
+    @classmethod 
+    def instance_from_db(cls,row) 
+        patient = cls.all.get(row[0])  
+        if patient: 
+            patient.name = row[1] 
+            patient.gender = row[2] 
+            patient.ssn = row[3] 
+            patient.age = row[4] 
+            patient.address = row[5] 
+        else: 
+            patient = cls(name=row[1], gender=row[2], ssn=row[3], age=row[4], address=row[5]) 
+            patient.id = row[0] 
+            cls.all[patient.id] = patient 
+        return patient
+
 
 # Get all patients from database 
     @classmethod  
@@ -82,7 +98,8 @@ class Patient:
             SELECT * FROM patients 
             WHERE id = ? 
         """ 
-        row = CURSOR.execute(sql, (id,)).fetchone() 
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None 
 
 # Finds patients by their name 
     @classmethod 
@@ -91,7 +108,8 @@ class Patient:
             SELECT * FROM patients 
             WHERE name = ? 
         """ 
-        rows = CURSOR.execute(sql, (name,)).fetchone() 
+        rows = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None 
 
 #Update a patient 
     def update(self): 
