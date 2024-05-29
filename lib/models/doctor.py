@@ -1,10 +1,10 @@
-from Patient import patient
+from models.patient import Patient
 
 class Doctor:
     all = {} 
     specialization = ['Cardiologist', 'Neurologist', 'Pediatrician', 'Dermatologist', 'Radiologist']
 
-    def __init__(self, name, speciality, patient_id, id=none):
+    def __init__(self, name, speciality, patient_id, id=None):
         self.name = name 
         self.speciality = speciality
         self.patient_id = patient_id
@@ -22,8 +22,8 @@ class Doctor:
     def patient_id(self, patient_id):
         if isinstance(patient_id, int):
             self._patient_id = patient_id
-            else:
-                raise TypeError("Patient ID must be an integer") 
+        else:
+            raise TypeError("Patient ID must be an integer") 
     
     @property 
     def speciality(self): 
@@ -77,7 +77,7 @@ class Doctor:
         return new_doctor  
 
     @classmethod 
-    def instance_from_db(cls,row) 
+    def instance_from_db(cls,row): 
         doctor = cls.all.get(row[0]) 
         if doctor: 
             doctor.name = row[1] 

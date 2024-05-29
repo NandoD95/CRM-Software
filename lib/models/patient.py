@@ -3,7 +3,7 @@ from models.__init__ import CURSOR,CONN
 class Patient:
     all = {} 
 
-    def __init__(self,name,id) 
+    def __init__(self,name,id): 
         self.name = name 
         self.id = id 
     
@@ -11,12 +11,12 @@ class Patient:
         return f'<Patient name = {self.name}>'  
     
     @property 
-    def name(self) 
+    def name(self): 
         return self._name 
     
     @name.setter 
-        def name(self, new_name):
-            if isinstance(new_name, str) and 0 < len(new_name) <= 20:
+    def name(self, new_name):
+        if isinstance(new_name, str) and 0 < len(new_name) <= 20:
             self._name = new_name
 
 # Create a patient table if it doesnt  exist  
@@ -70,7 +70,7 @@ class Patient:
         self.id = none  
 
     @classmethod 
-    def instance_from_db(cls,row) 
+    def instance_from_db(cls,row): 
         patient = cls.all.get(row[0])  
         if patient: 
             patient.name = row[1] 
@@ -116,9 +116,9 @@ class Patient:
         sql = """ 
         UPDATE patients 
         SET name = ?, gender = ?, ssn = ?, age = ?, address = ? 
-    """ 
-    CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address)) 
-    CONN.commit()
+        """ 
+        CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address)) 
+        CONN.commit()
 
 
 
