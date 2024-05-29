@@ -26,7 +26,9 @@ def main():
         if choice == "0":
             exit_program()
         elif choice == "1":
-            helper_1()
+            list_patients()
+        elif choice == "2":
+            list_doctors
         else:
             print("Invalid choice")
 
