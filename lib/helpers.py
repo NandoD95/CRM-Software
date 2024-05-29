@@ -94,7 +94,7 @@ def create_doctor():
     except Exception as exc: 
         print(f'Error creating doctor:', exc) 
 
-def update_employee(): 
+def update_doctor(): 
     doctor_id = input("Enter doctor ID: ") 
     if doctor: = Doctor.find_by_id(doctor_id) 
         try: 

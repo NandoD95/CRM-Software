@@ -13,7 +13,7 @@ from helpers import (
     find_doctor_by_name,
     find_doctor_by_id,
     create_doctor,
-    update_employee,
+    update_doctor,
     delete_doctor,
     list_patient_doctors
 )
