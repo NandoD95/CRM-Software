@@ -3,12 +3,15 @@ from models.__init__ import CURSOR,CONN
 class Patient:
     all = {} 
 
-    def __init__(self,name,id=None): 
+    def __init__(self, name, gender, ssn, age, address, id=None): 
         self.name = name 
-        self.id = id 
+        self.gender = gender
+        self.ssn = ssn
+        self.age = age
+        self.address = address
     
     def __repr__(self): 
-        return f'<Patient name = {self.name}>'  
+        return f'<Patient name = {self.name}>'
     
     @property 
     def name(self): 
@@ -25,10 +28,10 @@ class Patient:
         sql = """ 
             CREATE TABLE IF NOT EXISTS patients ( 
             id INTEGER PRIMARY KEY, 
-            name TEXT 
-            gender TEXT
-            ssn INTEGER
-            age INTEGER 
+            name TEXT, 
+            gender TEXT,
+            ssn INTEGER,
+            age INTEGER, 
             address TEXT 
         )
         """ 
@@ -37,7 +40,7 @@ class Patient:
 
 # Delete a patient table  
     @classmethod 
-    def delete_table(cls): 
+    def drop_table(cls): 
         sql = "DROP TABLE IF EXISTS patients" 
         CURSOR.execute(sql) 
         CONN.commit() 
@@ -51,10 +54,11 @@ class Patient:
         CURSOR.execute(sql,(self.name, self.gender, self.ssn, self.age, self.address)) 
         CONN.commit() 
         self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
        
 # Create new patients into the database 
     @classmethod
-    def create(cls,name,gender,ssn,age,adress): 
+    def create(cls,name,gender,ssn,age,address): 
         new_patient = cls(name=name, gender=gender, ssn=ssn, age=age, address=address) 
         new_patient.save() 
         return new_patient  
@@ -89,7 +93,8 @@ class Patient:
     @classmethod  
     def get_all(cls): 
         sql = "SELECT * FROM patients"  
-        rows = CURSOR.execute(sql).fetchall()  
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
 
 # Finds a patient in the database 
     @classmethod 
