@@ -133,15 +133,15 @@ class Patient:
 
 # list of doctors
     def doctors(self): 
-        breakpoint()
+        # breakpoint()
         sql = """ 
         SELECT * FROM doctors 
         WHERE patient_id = ? 
         """  
         rows = CURSOR.execute(sql, (self.id,)).fetchall()
-        breakpoint()
+        # breakpoint()
         CONN.commit() 
-        breakpoint()
+        # breakpoint()
         return [Doctor.instance_from_db(row) for row in rows]
 
     
