@@ -18,6 +18,23 @@ The system is designed to be secure and reliable.
 The system is designed to be scalable and flexible.
 The system is designed to be easy to maintain and update.
 
+## CLI 
+
+The system is a command line interface (CLI) application.
+
+The user interacts with the system by typing commands and the system responds with the result.
+
+In our back-end CRM system once you enter the cli you will be prompt with 3 options. 
+1. Patients
+2. Doctors
+3. Patients and Doctors Associations
+
+After entering the Patients you will be prompts with seven choices from listing, finding, creating, updating and deleting patients 
+
+As well the same thing for Doctors, once you enter Doctor you will be prompt with the same seven options. Helping you navigate doctors
+
+Third option will prompt you to list all the patients associated with a doctor. 
+
 ## Generating Your Environment
 
 You might have noticed in the file structure- there's already a Pipfile!
@@ -29,20 +46,3 @@ adding them to the `Pipfile`. Then run the commands:
 pipenv install
 pipenv shell
 ```
-
-### What Goes into a README?
-
-This README serves as a template. Replace the contents of this file to describe
-the important files in your project and describe what they do. Each Python file
-that you edit should get at least a paragraph, and each function should be
-described with a sentence or two.
-
-Describe your actual CLI script first, and with a good level of detail. The rest
-should be ordered by importance to the user. (Probably functions next, then
-models.)
-
-Screenshots and links to resources that you used throughout are also useful to
-users and collaborators, but a little more syntactically complicated. Only add
-these in if you're feeling comfortable with Markdown.
-
----
