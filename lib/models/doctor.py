@@ -68,10 +68,11 @@ class Doctor:
         CURSOR.execute(sql, (self.name, self.specialization, self.patient_id))
         CONN.commit()
         self.id = CURSOR.lastrowid
+        type(self).all[self.id] = self
     
 # create a new doctor
     @classmethod
-    def create_doctor(cls, name, specialization, patient_id):
+    def create_individual_doctor(cls, name, specialization, patient_id):
         new_doctor = cls(name=name, specialization=specialization, patient_id=patient_id)
         new_doctor.save_doctor()
         return new_doctor  
@@ -128,3 +129,22 @@ class Doctor:
         sql = "DROP TABLE IF EXISTS doctors" 
         CURSOR.execute(sql) 
         CONN.commit() 
+
+# update doctor to db
+    def update(self):
+        sql = """
+            UPDATE doctors
+            SET name = ?, specialization = ?, patient_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.name, self.specialization, self.patient_id, self.id))
+        CONN.commit()
+        return self
+
+# delete dr from db
+    def delete(self):
+        sql = "DELETE FROM doctors WHERE id = ?"
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+        return self
+        
