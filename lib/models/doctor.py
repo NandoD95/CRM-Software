@@ -95,11 +95,11 @@ class Doctor:
         sql = "SELECT * FROM doctors"
         CURSOR.execute(sql)
         rows = CURSOR.fetchall()
-        for row in rows:
-            cls.instance_from_db(row)
-            return list(cls.all.values())
-        # rows = CURSOR.execute(sql).fetchall()
-        # return [cls.instance_from_db(row) for row in rows]
+        # for row in rows:
+        #     cls.instance_from_db(row)
+        #     return list(cls.all.values())
+        rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
             
 
 # find doctor by name in db 
