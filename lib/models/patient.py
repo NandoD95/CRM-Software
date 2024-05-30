@@ -71,7 +71,8 @@ class Patient:
         """ 
         CURSOR.execute(sql, (self.id,)) 
         CONN.commit() 
-        self.id = none  
+        self.id = None 
+        # del type(self).all[self.id]
 
     @classmethod 
     def instance_from_db(cls,row): 
