@@ -39,7 +39,7 @@ class Doctor:
     @classmethod
     def create_table(cls):
         sql = """ 
-            CREATE TABLE IF NOT EXISTS  ( 
+            CREATE TABLE IF NOT EXISTS doctors ( 
             id INTEGER PRIMARY KEY, 
             name TEXT, 
             specialization TEXT, 

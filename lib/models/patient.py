@@ -60,7 +60,7 @@ class Patient:
     @classmethod
     def create_patient(cls,name,gender,ssn,age,address): 
         new_patient = cls(name=name, gender=gender, ssn=ssn, age=age, address=address) 
-        new_patient.save_patient() 
+        new_patient.save() 
         return new_patient  
 
 # Delete patients from database 
