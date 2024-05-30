@@ -1,4 +1,4 @@
-from models.patient import Patient
+# from models.patient import Patient
 from models.__init__ import CURSOR, CONN
 
 class Doctor:
@@ -10,7 +10,7 @@ class Doctor:
         self.specialization = specialization
         self.patient_id = patient_id
         self.id = id
-        # Doctor.all.append(self)
+        Doctor.all[id] = self
 
     def __repr__(self): 
         return f'<Doctor name = {self.name}>' 
