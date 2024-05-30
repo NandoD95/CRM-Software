@@ -1,4 +1,6 @@
-from models.__init__ import CURSOR,CONN 
+from models.__init__ import CURSOR,CONN  
+from models.doctor import Doctor
+
 
 class Patient:
     all = {} 
@@ -127,7 +129,22 @@ class Patient:
         """ 
         CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address, self.id)) 
         CONN.commit()
-        return self
+        return self 
+
+# list of doctors
+    def doctors(self): 
+        breakpoint()
+        sql = """ 
+        SELECT * FROM doctors 
+        WHERE patient_id = ? 
+        """  
+        rows = CURSOR.execute(sql, (self.id,)).fetchall()
+        breakpoint()
+        CONN.commit() 
+        breakpoint()
+        return [Doctor.instance_from_db(row) for row in rows]
+
+    
 
 
 
