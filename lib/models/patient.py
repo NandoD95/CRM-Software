@@ -74,6 +74,7 @@ class Patient:
         self.id = None 
         # del type(self).all[self.id]
 
+# categorize the patient table
     @classmethod 
     def instance_from_db(cls,row): 
         patient = cls.all.get(row[0])  

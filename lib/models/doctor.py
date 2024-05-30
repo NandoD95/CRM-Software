@@ -77,6 +77,7 @@ class Doctor:
         new_doctor.save_doctor()
         return new_doctor  
 
+# categorize the doctor table
     @classmethod 
     def instance_from_db(cls,row): 
         doctor = cls.all.get(row[0]) 
@@ -147,4 +148,3 @@ class Doctor:
         CURSOR.execute(sql, (self.id,))
         CONN.commit()
         return self
-        
