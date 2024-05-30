@@ -72,10 +72,12 @@ def delete_patient():
 
 
 def list_doctors(): 
-    doctors = Doctor.get_all_doctors() 
+    doctors = Doctor.get_all_doctor() 
     print (doctors)
-    for doctor in doctors: 
-        print(doctor)
+    for doctor in doctors:
+        print(f'ID: {doctor.id}, Name: {doctor.name}, Specialty: {doctor.specialization}')
+    # for doctor in doctors: 
+    #     print(doctor) 
 
 def find_doctor_by_name(): 
     name = input("Enter doctor name: ") 

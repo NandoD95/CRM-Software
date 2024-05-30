@@ -39,14 +39,14 @@ class Doctor:
     @classmethod
     def create_table(cls):
         sql = """ 
-            CREATE TABLE IF NOT EXISTS  ( 
+            CREATE TABLE IF NOT EXISTS doctors ( 
             id INTEGER PRIMARY KEY, 
             name TEXT, 
             specialization TEXT, 
             patient_id INTEGER 
         )
-        """ 
-        CURSOR.execute(sql) 
+        """
+        CURSOR.execute(sql)
         CONN.commit()
 
 # save db to table
@@ -91,12 +91,15 @@ class Doctor:
 
 #get all doctors from db 
     @classmethod 
-    def get_all_doctors(cls): 
-        sql = """ 
-            SELECT * FROM doctors 
-        """ 
-        rows = CURSOR.execute(sql).fetchall()
-        return [cls.instance_from_db(row) for row in rows]
+    def get_all_doctor(cls): 
+        sql = "SELECT * FROM doctors"
+        CURSOR.execute(sql)
+        rows = CURSOR.fetchall()
+        for row in rows:
+            cls.instance_from_db(row)
+            return list(cls.all.values())
+        # rows = CURSOR.execute(sql).fetchall()
+        # return [cls.instance_from_db(row) for row in rows]
             
 
 # find doctor by name in db 
