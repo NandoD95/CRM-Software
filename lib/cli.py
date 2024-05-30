@@ -55,7 +55,7 @@ def patients():
         elif choice == "3":
             find_patient_by_id()
         elif choice == "4":
-            create_patient
+            create_patient()
         elif choice == "5":
             update_patient()
         elif choice == "6":

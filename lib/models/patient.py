@@ -58,7 +58,7 @@ class Patient:
        
 # Create new patients into the database 
     @classmethod
-    def create_patient(cls,name,gender,ssn,age,address): 
+    def create_individual_patient(cls,name,gender,ssn,age,address): 
         new_patient = cls(name=name, gender=gender, ssn=ssn, age=age, address=address) 
         new_patient.save() 
         return new_patient  

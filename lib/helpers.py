@@ -28,12 +28,12 @@ def find_patient_by_id():
 
 def create_patient(): 
     name = input("Enter patient name: ")
-    age = input("Enter patient age: ") 
     gender = input("Enter patient gender: ") 
-    address = input("Enter patient address: ") 
     ssn = input("Enter patient ssn: ") 
+    age = input("Enter patient age: ") 
+    address = input("Enter patient address: ") 
     try: 
-        patient = Patient.create(name, age, gender,address, ssn) 
+        patient = Patient.create_individual_patient(name, gender, ssn, age, address) 
         print(f'Success: {patient}')
 
     except Exception as exc:
@@ -46,14 +46,14 @@ def update_patient():
         try: 
             name = input("Enter new patient name: ") 
             patient.name = name  
-            age = input("Enter new patient age: ") 
-            patient.age = age 
             gender = input("Enter new patient gender: ") 
-            patient.gender = gender 
-            address = input("Enter new patient address: ")
-            patient.address = address 
+            patient.gender = gender
             ssn = input("Enter new patient ssn: ") 
-            patient.ssn = ssn 
+            patient.ssn = ssn
+            age = input("Enter new patient age: ")
+            patient.age = age
+            address = input("Enter new patient address: ") 
+            patient.address = address
             patient.update() 
             print(f'Success: {patient_id}') 
         except Exception as exc: 
