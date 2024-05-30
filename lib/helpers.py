@@ -94,7 +94,7 @@ def create_doctor():
     specialization = input("Enter the doctor's specialization: ") 
     patient_id = input("Enters the patient_id: ") 
     try: 
-        doctor = Doctor(name, specialization, int(patient_id)) 
+        doctor = Doctor.create_individual_doctor(name, specialization, int(patient_id)) 
         print(f'Success: {doctor}') 
     except Exception as exc: 
         print(f'Error creating doctor:', exc) 
@@ -111,12 +111,12 @@ def update_doctor():
             patient_id = input("Enter new patient id: ") 
             doctor.patient_id = int(patient_id) 
             
-            doctor.save() 
+            doctor.update() 
             print(f'Success {doctor}') 
         except Exception as exc: 
             print(f'Error updating doctor:', exc)  
-        else: 
-                print(f'Doctor with ID {doctor_id} not found') 
+    else: 
+            print(f'Doctor with ID {doctor_id} not found') 
 
 def delete_doctor(): 
     doctor_id = input("Enter doctor ID: ") 

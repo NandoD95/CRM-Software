@@ -122,8 +122,9 @@ class Patient:
         sql = """ 
         UPDATE patients 
         SET name = ?, gender = ?, ssn = ?, age = ?, address = ? 
+        WHERE id = ?
         """ 
-        CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address)) 
+        CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address, self.id)) 
         CONN.commit()
         return self
 
