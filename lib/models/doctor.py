@@ -39,7 +39,7 @@ class Doctor:
     @classmethod
     def create_table(cls):
         sql = """ 
-            CREATE TABLE IF NOT EXISTS doctors ( 
+            CREATE TABLE IF NOT EXISTS  ( 
             id INTEGER PRIMARY KEY, 
             name TEXT, 
             specialization TEXT, 
@@ -96,6 +96,8 @@ class Doctor:
             SELECT * FROM doctors 
         """ 
         rows = CURSOR.execute(sql).fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+            
 
 # find doctor by name in db 
     @classmethod 

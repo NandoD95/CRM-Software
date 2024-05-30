@@ -3,7 +3,7 @@
 from helpers import (
     exit_program,
     list_patients,
-    find_patient_by_name,
+    find_patient_by_user_input,
     find_patient_by_id,
     create_patient,
     update_patient,
@@ -38,9 +38,9 @@ def menu():
     print("Patient and Doctor Management System")
     print("Please select an option:")
     print("0. Exit the program")
-    print("1. List Patients")
-    print("2. List Doctors")
-    print("3. List Patient-Doctor Associations")
+    print("1. Patients")
+    print("2. Doctors")
+    print("3. Patient-Doctor Associations")
 
 def patients():
     while True:
@@ -51,7 +51,7 @@ def patients():
         elif choice == "1":
             list_patients()
         elif choice == "2":
-            find_patient_by_name()
+            find_patient_by_user_input()
         elif choice == "3":
             find_patient_by_id()
         elif choice == "4":
