@@ -16,9 +16,9 @@ def list_patients():
     for patient in patients: 
         print(patient) 
 
-def find_patient_by_name(): 
+def find_patient_by_user_input(): 
     name = input("Enter patient name: ") 
-    patients = Patient.find_by_name(name) 
+    patient = Patient.find_by_name(name) 
     print(patient) if patient else print(f'Patient {name} not found') 
 
 def find_patient_by_id(): 
@@ -51,12 +51,11 @@ def update_patient():
             gender = input("Enter new patient gender: ") 
             patient.gender = gender 
             address = input("Enter new patient address: ")
-            patient.adress = address 
+            patient.address = address 
             ssn = input("Enter new patient ssn: ") 
             patient.ssn = ssn 
-
             patient.update() 
-            print(f'Success: {patient}') 
+            print(f'Success: {patient_id}') 
         except Exception as exc: 
             print(f'Error updating patient:', exc) 
     else:  
@@ -73,9 +72,10 @@ def delete_patient():
 
 
 def list_doctors(): 
-    doctors = Doctor.find_all() 
+    doctors = Doctor.get_all_doctors() 
+    print (doctors)
     for doctor in doctors: 
-        print(doctor)  
+        print(doctor)
 
 def find_doctor_by_name(): 
     name = input("Enter doctor name: ") 

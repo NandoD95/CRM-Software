@@ -58,9 +58,9 @@ class Patient:
        
 # Create new patients into the database 
     @classmethod
-    def create(cls,name,gender,ssn,age,address): 
+    def create_patient(cls,name,gender,ssn,age,address): 
         new_patient = cls(name=name, gender=gender, ssn=ssn, age=age, address=address) 
-        new_patient.save() 
+        new_patient.save_patient() 
         return new_patient  
 
 # Delete patients from database 
@@ -114,9 +114,9 @@ class Patient:
             WHERE name = ? 
         """ 
         rows = CURSOR.execute(sql, (name,)).fetchone()
-        return cls.instance_from_db(row) if row else None 
+        return cls.instance_from_db(rows) 
 
-#Update a patient 
+# Update a patient 
     def update(self): 
         sql = """ 
         UPDATE patients 
@@ -124,6 +124,7 @@ class Patient:
         """ 
         CURSOR.execute(sql, (self.name, self.gender, self.ssn, self.age, self.address)) 
         CONN.commit()
+        return self
 
 
 
